@@ -73,6 +73,8 @@ void shoot_heat_limit(void)
   * @note           
   */
 //int shoot_B;
+float bullet_speed=18;
+
 void shoot_speed_limit(void)     //18的要小心     *hyj
 {
 //	int shoot_B;
@@ -84,15 +86,8 @@ void shoot_speed_limit(void)     //18的要小心     *hyj
 //		case 30:shoot_B=110; break;
 //		default:  break;
 //	}
-	shoot_mag.allow_fri_speed = Judge_data.shooter_id1_17mm_speed_limit * shoot_K - shoot_B;          
-	if (Judge_data.bullet_speed <  Judge_data.shooter_id1_17mm_speed_limit && !shoot_mag.Excess_Speed_shoot_flag)
-	{
-		shoot_mag.allow_shoot_speed = (12 - 30) * shoot_K + shoot_B;
-	}
-	else 
-	{
-		shoot_mag.allow_shoot_speed = (12 - 30) * shoot_K + shoot_B;
-	}
+	shoot_mag.allow_shoot_speed = (bullet_speed-30)/15*340+1000;//23届弹速无限制，30m/s都可以，后面把这个自变量换成裁判系统限制的最大弹速
+	//y=(x-x2)/(x1-x2)*(y1-y2)+y2  (15,660) (30,1000) 两点式，自变量是弹速，结果是摩擦轮速度
 	//加最值限制
 	if (shoot_mag.allow_shoot_speed > 1000)
 	{
